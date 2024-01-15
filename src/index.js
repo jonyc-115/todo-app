@@ -2,6 +2,7 @@ import express from "express";
 import tasksRouter from "./routes/tasks.routes.js";
 import morgan from "morgan";
 import { connectDB } from "./db.js";
+import cors from "cors";
 
 async function main() {
   await connectDB();
@@ -11,6 +12,7 @@ main();
 
 const app = express();
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/api", tasksRouter);

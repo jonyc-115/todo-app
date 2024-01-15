@@ -4,7 +4,7 @@ import { helpFetch } from "../helper/helpFetch";
 const initialValue = {
   title: "",
   description: "",
-  id: "",
+  _id: "",
 };
 
 const TaskContext = createContext();
@@ -29,8 +29,8 @@ export const TaskContextProvider = ({ children }) => {
 
   const deletedTask = async (id) => {
     try {
-      await del(`http://localhost:3000/tasks/${id}`);
-      const newTasks = tasks.filter((task) => task.id !== id);
+      await del(`http://localhost:4000/api/tasks/${id}`);
+      const newTasks = tasks.filter((task) => task._id !== id);
 
       return setTasks(newTasks);
     } catch (error) {
@@ -40,9 +40,9 @@ export const TaskContextProvider = ({ children }) => {
 
   const updatedTask = async (task) => {
     try {
-      await put(`http://localhost:3000/tasks/${task.id}`, { body: task });
+      await put(`http://localhost:4000/api/tasks/${task._id}`, { body: task });
 
-      const newTasks = tasks.map((el) => (el.id === task.id ? task : el));
+      const newTasks = tasks.map((el) => (el._id === task._id ? task : el));
 
       setTasks(newTasks);
     } catch (error) {
@@ -51,7 +51,9 @@ export const TaskContextProvider = ({ children }) => {
   };
 
   const createdTask = async (task) => {
-    const newTask = await post("http://localhost:3000/tasks/", { body: task });
+    const newTask = await post("http://localhost:4000/api/tasks/", {
+      body: task,
+    });
 
     console.log(newTask);
 

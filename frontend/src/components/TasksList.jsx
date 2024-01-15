@@ -9,7 +9,7 @@ const TasksList = () => {
 
   useEffect(() => {
     async function awaitGet() {
-      const data = await helpFetch().get("http://localhost:3000/tasks");
+      const data = await helpFetch().get("http://localhost:4000/api/tasks");
 
       setTasks(data);
     }
@@ -26,7 +26,7 @@ const TasksList = () => {
           There are no tasks to show
         </p>
       ) : (
-        tasks?.map((task) => <TaskCard task={task} key={task.id} />)
+        tasks?.map((task) => <TaskCard task={task} key={task._id} />)
       )}
     </ul>
   );

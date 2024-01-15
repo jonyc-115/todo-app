@@ -7,7 +7,7 @@ const TaskCard = ({ task }) => {
   const navigate = useNavigate();
 
   return (
-    <li className="p-2 bg-white shadow-md rounded-md" key={task.id}>
+    <li className="p-2 bg-white shadow-md rounded-md">
       <div className="mb-3">
         <h3 className="font-semibold text-lg">{task.title}</h3>
         <p>{task.description}</p>
@@ -25,7 +25,7 @@ const TaskCard = ({ task }) => {
         </button>
         <button
           onClick={() => {
-            deletedTask(task.id);
+            deletedTask(task._id);
           }}
           className="bg-red-500 text-white px-3 py-1 rounded-md"
         >
