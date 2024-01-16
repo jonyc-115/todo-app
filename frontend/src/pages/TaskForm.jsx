@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTasks } from "../context/TaskContext";
 
 const TaskForm = () => {
+  const [error, setError] = useState({
+    title: "",
+    description: "",
+  });
   const navigate = useNavigate();
   const {
     isId,
@@ -28,15 +32,34 @@ const TaskForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isId) {
-      await createdTask(form);
-      navigate("/");
+    console.log(!error.title);
+
+    if (form.title !== "" && form.description !== "") {
+      console.log(error);
+      if (!isId) {
+        await createdTask(form);
+        navigate("/");
+        setForm(initialValue);
+        setIsId(false);
+      } else {
+        await updatedTask(form);
+        navigate("/");
+        setForm(initialValue);
+        setIsId(false);
+      }
     } else {
-      await updatedTask(form);
-      navigate("/");
+      let err = {};
+      if (!form.title) {
+        err.title = "la tarea debe llevar un titulo";
+      }
+
+      if (!form.description) {
+        err.description = "La tarea debe llevar una descripcion";
+      }
+
+      setError(err);
+      console.log(err);
     }
-    setForm(initialValue);
-    setIsId(false);
   };
 
   return (
@@ -53,6 +76,7 @@ const TaskForm = () => {
           onChange={handleChange}
           value={form.title}
         />
+        {error && <p>{error.title}</p>}
         <textarea
           className="bg-[#f7f9ff] rounded-md resize-none p-2 border border-[#cbcfe3] outline-none text-slate-700"
           name="description"
@@ -60,8 +84,9 @@ const TaskForm = () => {
           onChange={handleChange}
           value={form.description}
         ></textarea>
+        {error && <p>{error.description}</p>}
         <button className="bg-blue-500 text-white p-1 rounded-md text-md font-semibold">
-          {isId ? "Edit" : "Create"}
+          {isId ? "Edit" : "Save"}
         </button>
       </form>
     </div>

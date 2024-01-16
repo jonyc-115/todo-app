@@ -20,7 +20,7 @@ const TasksList = () => {
   }, []);
 
   return (
-    <ul className="p-3 mx-auto max-w-lg grid grid-cols-fluid gap-4">
+    <ul className="p-3 mx-auto max-w-4xl grid grid-cols-fluid gap-4">
       {!tasks.length ? (
         <p className="text-center font-semibold text-slate-500 text-lg">
           There are no tasks to show
