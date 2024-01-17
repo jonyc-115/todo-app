@@ -4,51 +4,25 @@ import Header from "./components/Header";
 import TaskForm from "./pages/TaskForm";
 import { useState } from "react";
 import { TaskContextProvider } from "./context/TaskContext";
+import { UserContextProvider } from "./context/UserContext";
 import RegisterPage from "./pages/RegisterPage";
-
-const initialValue = {
-  title: "",
-  description: "",
-  id: "",
-};
+import LoginPage from "./pages/LoginPage";
 
 function App() {
-  const [isId, setIsId] = useState(false);
-  const [form, setForm] = useState(initialValue);
-
   return (
     <BrowserRouter>
-      <TaskContextProvider>
-        <Header
-          initialValue={initialValue}
-          setForm={setForm}
-          setIsId={setIsId}
-        />
-        <Routes>
-          <Route path="/register" element={<RegisterPage />} />
-          <Route
-            path="/"
-            element={
-              <HomePage setForm={setForm} setIsId={setIsId} isId={isId} />
-            }
-          />
-          <Route path="/register" element={<h1>Register</h1>} />
-          <Route path="/login" element={<h1>login</h1>} />
-          <Route path="/tasks" element={<h1>TaskPage</h1>} />
-          <Route
-            path="/taskform"
-            element={
-              <TaskForm
-                isId={isId}
-                form={form}
-                setForm={setForm}
-                setIsId={setIsId}
-                initialValue={initialValue}
-              />
-            }
-          />
-        </Routes>
-      </TaskContextProvider>
+      <UserContextProvider>
+        <TaskContextProvider>
+          <Header />
+          <Routes>
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/tasks" element={<h1>TaskPage</h1>} />
+            <Route path="/taskform" element={<TaskForm />} />
+          </Routes>
+        </TaskContextProvider>
+      </UserContextProvider>
     </BrowserRouter>
   );
 }

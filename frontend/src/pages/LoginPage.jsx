@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { useAuth } from "../context/UserContext";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/UserContext";
 
 const initialValue = {
-  username: "",
   email: "",
   password: "",
 };
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const [form, setForm] = useState(initialValue);
   const { createdUser } = useAuth();
   const navigate = useNavigate();
@@ -34,15 +33,7 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
         className="shadow-md w-[26rem] flex flex-col gap-2 bg-white p-4 rounded-md"
       >
-        <h3 className="text-2xl font-semibold text-slate-700">Register</h3>
-        <input
-          name="username"
-          className=" bg-[#f7f9ff] p-2 rounded-md border border-[#cbcfe3] outline-none text-slate-700"
-          type="text"
-          placeholder="Username"
-          onChange={handleChange}
-          value={form.username}
-        />
+        <h3 className="text-2xl font-semibold text-slate-700">Login</h3>
         <input
           type="email"
           className="bg-[#f7f9ff] rounded-md p-2 border border-[#cbcfe3] outline-none text-slate-700"
@@ -62,17 +53,17 @@ const RegisterPage = () => {
         />
 
         <button className="bg-blue-500 text-white p-1 rounded-md text-md font-semibold">
-          Submit
+          Login
         </button>
-        <p className="flex justify-between ">
-          Do you already have an account?{" "}
-          <Link className="text-blue-700 font-semibold" to="/login">
-            Log in.
-          </Link>
+        <p className="flex justify-between gap-2">
+          Don't you have an account yet?{" "}
+          <Link className="text-blue-700 font-semibold" to="/register">
+            Register!
+          </Link>{" "}
         </p>
       </form>
     </div>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
