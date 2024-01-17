@@ -13,7 +13,7 @@ const Header = () => {
           </h2>
         </Link>
 
-        <nav>
+        <nav className="flex items-center gap-2">
           <Link
             onClick={() => {
               setForm(initialValue);
@@ -24,6 +24,7 @@ const Header = () => {
           >
             Add Task
           </Link>
+          <Link to="/register">Register</Link>
         </nav>
       </div>
     </header>

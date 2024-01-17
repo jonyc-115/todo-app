@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import TaskForm from "./pages/TaskForm";
 import { useState } from "react";
 import { TaskContextProvider } from "./context/TaskContext";
+import RegisterPage from "./pages/RegisterPage";
 
 const initialValue = {
   title: "",
@@ -24,6 +25,7 @@ function App() {
           setIsId={setIsId}
         />
         <Routes>
+          <Route path="/register" element={<RegisterPage />} />
           <Route
             path="/"
             element={

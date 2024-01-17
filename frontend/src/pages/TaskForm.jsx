@@ -66,7 +66,7 @@ const TaskForm = () => {
     <div className="mx-full flex justify-center items-center p-3 min-h-[90vh]">
       <form
         onSubmit={handleSubmit}
-        className="shadow-md min-w-[18rem] flex flex-col gap-4 bg-white p-4 rounded-md"
+        className="shadow-md min-w-[18rem] flex flex-col gap-2 bg-white p-4 rounded-md"
       >
         <input
           name="title"
@@ -76,7 +76,7 @@ const TaskForm = () => {
           onChange={handleChange}
           value={form.title}
         />
-        {error && <p>{error.title}</p>}
+        {error && <p className="text-center text-red-500">{error.title}</p>}
         <textarea
           className="bg-[#f7f9ff] rounded-md resize-none p-2 border border-[#cbcfe3] outline-none text-slate-700"
           name="description"
@@ -84,7 +84,9 @@ const TaskForm = () => {
           onChange={handleChange}
           value={form.description}
         ></textarea>
-        {error && <p>{error.description}</p>}
+        {error && (
+          <p className="text-center text-red-500">{error.description}</p>
+        )}
         <button className="bg-blue-500 text-white p-1 rounded-md text-md font-semibold">
           {isId ? "Edit" : "Save"}
         </button>
